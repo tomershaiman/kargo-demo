@@ -4,7 +4,9 @@
     "kind@0.24.0",
     "kubectl@1.31.0",
     "kubernetes-helm@3.16.1",
-    "zellij@0.40.1"
+    "zellij@0.40.1",
+    "yq-go@4.44.3",
+    "teller@2.0.7"
   ],
   "shell": {
     "init_hook": [],
