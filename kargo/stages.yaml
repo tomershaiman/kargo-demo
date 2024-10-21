@@ -29,7 +29,7 @@ spec:
           config:
             path: ./src/base
             images:
-              - image: public.ecr.aws/nginx/nginx
+              - image: ghcr.io/vfarcic/silly-demo
         - uses: kustomize-build
           config:
             path: ./src/stages/test
@@ -84,7 +84,7 @@ spec:
           config:
             path: ./src/base
             images:
-              - image: public.ecr.aws/nginx/nginx
+              - image: ghcr.io/vfarcic/silly-demo
         - uses: kustomize-build
           config:
             path: ./src/stages/test
@@ -139,7 +139,7 @@ spec:
           config:
             path: ./src/base
             images:
-              - image: public.ecr.aws/nginx/nginx
+              - image: ghcr.io/vfarcic/silly-demo
         - uses: kustomize-build
           config:
             path: ./src/stages/test

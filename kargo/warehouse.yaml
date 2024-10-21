@@ -5,6 +5,7 @@ metadata:
 spec:
   subscriptions:
   - image:
-      repoURL: public.ecr.aws/nginx/nginx
-      semverConstraint: ^1.26.0
+      # repoURL: public.ecr.aws/nginx/nginx
+      repoURL: ghcr.io/vfarcic/silly-demo
+      semverConstraint: ^1.4.298
       discoveryLimit: 5
