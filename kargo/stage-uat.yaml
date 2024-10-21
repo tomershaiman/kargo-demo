@@ -33,7 +33,7 @@ spec:
           - image: ghcr.io/vfarcic/silly-demo
       - uses: kustomize-build
         config:
-          path: ./src/kustomize/overlays/test
+          path: ./src/kustomize/overlays/uat
           outPath: ./out/manifests.yaml
       - uses: git-commit
         as: commit

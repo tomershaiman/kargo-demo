@@ -1,5 +1,7 @@
 #!/usr/bin/env nu
 
+rm --force .env
+
 source scripts/kubernetes.nu
 source scripts/ingress.nu
 source scripts/cert-manager.nu
@@ -47,7 +49,7 @@ $"export GITHUB_USERNAME=($github_username)\n"
     | save --append .env
 
 let github_repo_url = $"https://github.com/($github_username)/kargo-demo"
-$"export GITHBU_REPO_URL=($github_repo_url)\n"
+$"export GITHUB_REPO_URL=($github_repo_url)\n"
     | save --append .env
 
 mut github_pat = ""
@@ -69,3 +71,10 @@ for environment in ["test", "uat", "prod"] {
         | upsert spec.promotionTemplate.spec.steps.6.config.apps.0.sources.0.repoURL $github_repo_url
         | save $"kargo/stage-($environment).yaml" --force
 }
+
+git add .
+
+git commit -m "Customization"
+
+git push
+

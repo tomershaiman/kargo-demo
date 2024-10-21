@@ -129,7 +129,7 @@ aws_secret_access_key = ($aws_secret_access_key)
 
 }
 
-def destroy_kubernetes [type: string] {
+def destroy_kubernetes [provider: string] {
 
     if $provider == "google" {
 
