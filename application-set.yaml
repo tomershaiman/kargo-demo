@@ -4,11 +4,11 @@ metadata:
   name: kargo-demo
 spec:
   generators:
-    - list:
-        elements:
-          - stage: test
-          - stage: uat
-          - stage: prod
+  - list:
+      elements:
+      - stage: test
+      - stage: uat
+      - stage: prod
   template:
     metadata:
       name: kargo-demo-{{stage}}
@@ -25,4 +25,4 @@ spec:
         namespace: kargo-demo-{{stage}}
       syncPolicy:
         syncOptions:
-          - CreateNamespace=true
+        - CreateNamespace=true
