@@ -27,12 +27,12 @@ spec:
         - uses: kustomize-set-image
           as: update-image
           config:
-            path: ./src/base
+            path: ./src/kustomize/base
             images:
               - image: ghcr.io/vfarcic/silly-demo
         - uses: kustomize-build
           config:
-            path: ./src/stages/test
+            path: ./src/kustomize/overlays/test
             outPath: ./out/manifests.yaml
         - uses: git-commit
           as: commit
@@ -82,12 +82,12 @@ spec:
         - uses: kustomize-set-image
           as: update-image
           config:
-            path: ./src/base
+            path: ./src/kustomize/base
             images:
               - image: ghcr.io/vfarcic/silly-demo
         - uses: kustomize-build
           config:
-            path: ./src/stages/test
+            path: ./src/kustomize/overlays/test
             outPath: ./out/manifests.yaml
         - uses: git-commit
           as: commit
@@ -137,12 +137,12 @@ spec:
         - uses: kustomize-set-image
           as: update-image
           config:
-            path: ./src/base
+            path: ./src/kustomize/base
             images:
               - image: ghcr.io/vfarcic/silly-demo
         - uses: kustomize-build
           config:
-            path: ./src/stages/test
+            path: ./src/kustomize/overlays/test
             outPath: ./out/manifests.yaml
         - uses: git-commit
           as: commit
