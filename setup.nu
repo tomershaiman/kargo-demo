@@ -72,9 +72,13 @@ for environment in ["test", "uat", "prod"] {
         | save $"kargo/stage-($environment).yaml" --force
 }
 
-git add .
+do --ignore-errors {
+    git add .
+    git commit -m "Customization"
+    git push
+}
 
-git commit -m "Customization"
-
-git push
-
+print $"
+Install (ansi green_bold)kargo CLI(ansi reset) from https://kargo.akuity.io/quickstart#installing-the-kargo-cli.
+Press (ansi green_bold)any key(ansi reset) to continue."
+    input
