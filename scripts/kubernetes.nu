@@ -166,7 +166,7 @@ def destroy_kubernetes [provider: string] {
 
     } else if $provider == "kind" {
 
-        az group delete --name $env.RESOURCE_GROUP --yes
+        kind delete cluster
 
     }
 

@@ -17,7 +17,7 @@ spec:
         config:
           repoURL: https://github.com/vfarcic/kargo-demo
           checkout:
-          - branch: main
+          - fromFreight: true
             path: ./src
           - branch: stage/prod
             create: true
