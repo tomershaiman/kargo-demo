@@ -6,7 +6,7 @@ spec:
   requestedFreight:
   - origin:
       kind: Warehouse
-      name: kargo-demo
+      name: silly-demo
     sources:
       stages:
       - test
@@ -48,7 +48,7 @@ spec:
       - uses: argocd-update
         config:
           apps:
-          - name: kargo-demo-uat
+          - name: silly-demo-uat
             sources:
             - repoURL: https://github.com/vfarcic/kargo-demo
               desiredCommitFromStep: commit

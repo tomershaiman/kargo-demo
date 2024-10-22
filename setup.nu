@@ -6,6 +6,23 @@ source scripts/kubernetes.nu
 source scripts/ingress.nu
 source scripts/cert-manager.nu
 
+let github_username = input $"(ansi green_bold)Enter GitHub username: (ansi reset)"
+$"export GITHUB_USERNAME=($github_username)\n"
+    | save --append .env
+
+let github_repo_url = $"https://github.com/($github_username)/kargo-demo"
+$"export GITHUB_REPO_URL=($github_repo_url)\n"
+    | save --append .env
+
+mut github_pat = ""
+if GITHUB_PAT in $env {
+    $github_pat = $env.GITHUB_PAT
+} else {
+    $github_pat = input $"(ansi green_bold)Enter GitHub private access token: (ansi reset)" --suppress-output
+}
+$"export GITHUB_PAT=($github_pat)\n"
+    | save --append .env
+
 create_kubernetes kind
 
 let ingress_data = apply_ingress kind nginx
@@ -43,23 +60,6 @@ apply_certmanager
         --set api.adminAccount.tokenSigningKey=iwishtowashmyirishwristwatch
         --wait
 )
-
-let github_username = input $"(ansi green_bold)Enter GitHub username: (ansi reset)"
-$"export GITHUB_USERNAME=($github_username)\n"
-    | save --append .env
-
-let github_repo_url = $"https://github.com/($github_username)/kargo-demo"
-$"export GITHUB_REPO_URL=($github_repo_url)\n"
-    | save --append .env
-
-mut github_pat = ""
-if GITHUB_PAT in $env {
-    $github_pat = $env.GITHUB_PAT
-} else {
-    $github_pat = input $"(ansi green_bold)Enter GitHub private access token: (ansi reset)" --suppress-output
-}
-$"export GITHUB_PAT=($github_pat)\n"
-    | save --append .env
 
 open application-set.yaml
     | upsert spec.template.spec.source.repoURL $github_repo_url
