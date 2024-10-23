@@ -9,4 +9,4 @@ patches:
   patch: |-
     - op: replace
       path: /spec/rules/0/host
-      value: silly-demo.test.127.0.0.1.nip.io
+      value: silly-demo.dev.127.0.0.1.nip.io
