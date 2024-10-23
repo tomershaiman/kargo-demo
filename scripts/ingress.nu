@@ -19,7 +19,7 @@ def apply_ingress [provider: string, type = "traefik"] {
                     --filename https://raw.githubusercontent.com/kubernetes/ingress-nginx/main/deploy/static/provider/kind/deploy.yaml
             )
 
-            sleep 3sec
+            sleep 10sec
 
             (
                 kubectl --namespace ingress-nginx wait

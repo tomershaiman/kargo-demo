@@ -9,7 +9,7 @@ spec:
       name: silly-demo
     sources:
       stages:
-      - uat
+      - pre-prod
   promotionTemplate:
     spec:
       steps:
