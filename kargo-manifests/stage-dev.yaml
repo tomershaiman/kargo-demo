@@ -1,15 +1,14 @@
 apiVersion: kargo.akuity.io/v1alpha1
 kind: Stage
 metadata:
-  name: uat
+  name: dev
 spec:
   requestedFreight:
   - origin:
       kind: Warehouse
       name: silly-demo
     sources:
-      stages:
-      - test
+      direct: true
   promotionTemplate:
     spec:
       steps:
@@ -19,7 +18,7 @@ spec:
           checkout:
           - branch: main
             path: ./src
-          - branch: stage/uat
+          - branch: stage/dev
             create: true
             path: ./out
       - uses: git-clear
@@ -33,7 +32,7 @@ spec:
           - image: ghcr.io/vfarcic/silly-demo
       - uses: kustomize-build
         config:
-          path: ./src/kustomize/overlays/uat
+          path: ./src/kustomize/overlays/dev
           outPath: ./out/manifests.yaml
       - uses: git-commit
         as: commit
@@ -44,11 +43,11 @@ spec:
       - uses: git-push
         config:
           path: ./out
-          targetBranch: stage/uat
+          targetBranch: stage/dev
       - uses: argocd-update
         config:
           apps:
-          - name: silly-demo-uat
+          - name: silly-demo-dev
             sources:
             - repoURL: https://github.com/vfarcic/kargo-demo
               desiredCommitFromStep: commit

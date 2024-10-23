@@ -33,15 +33,7 @@ apply_certmanager
     helm upgrade --install argocd argo-cd
         --repo https://argoproj.github.io/argo-helm
         --namespace argocd --create-namespace
-        --set 'configs.secret.argocdServerAdminPassword=$2a$10$5vm8wXaSdbuff0m9l21JdevzXBzJFPCi8sy6OOnpZMAG.fOXL7jvO'
-        --set dex.enabled=false
-        --set notifications.enabled=false
-        --set server.service.type=NodePort
-        --set server.service.nodePortHttp=31443
-        --set server.extensions.enabled=true
-        --set 'server.extensions.contents[0].name=argo-rollouts'
-        --set 'server.extensions.contents[0].url=https://github.com/argoproj-labs/rollout-extension/releases/download/v0.3.3/extension.tar'
-        --wait
+        --values argocd-values.yaml --wait
 )
 
 (
@@ -65,11 +57,11 @@ open application-set.yaml
     | upsert spec.template.spec.source.repoURL $github_repo_url
     | save application-set.yaml --force
 
-for environment in ["test", "uat", "prod"] {
-    open $"kargo/stage-($environment).yaml"
+for environment in ["dev", "pre-prod", "prod"] {
+    open $"kargo-manifests/stage-($environment).yaml"
         | upsert spec.promotionTemplate.spec.steps.0.config.repoURL $github_repo_url
         | upsert spec.promotionTemplate.spec.steps.6.config.apps.0.sources.0.repoURL $github_repo_url
-        | save $"kargo/stage-($environment).yaml" --force
+        | save $"kargo-manifests/stage-($environment).yaml" --force
 }
 
 do --ignore-errors {
@@ -79,6 +71,6 @@ do --ignore-errors {
 }
 
 print $"
-Install (ansi green_bold)kargo CLI(ansi reset) from https://kargo.akuity.io/quickstart#installing-the-kargo-cli.
+Install (ansi green_bold)kargo CLI(ansi reset) from https://docs.kargo.io/quickstart#installing-the-kargo-cli.
 Press (ansi green_bold)any key(ansi reset) to continue."
     input

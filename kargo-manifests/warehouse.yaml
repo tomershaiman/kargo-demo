@@ -6,5 +6,5 @@ spec:
   subscriptions:
   - image:
       repoURL: ghcr.io/vfarcic/silly-demo
-      semverConstraint: ^1.4.298
+      semverConstraint: ^1.x
       discoveryLimit: 5
