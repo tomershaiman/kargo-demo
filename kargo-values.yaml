@@ -1,10 +1,7 @@
 api:
-  host: kargo.127.0.0.1.nip.io
-  ingress:
-    enabled: true
-    ingressClassName: nginx
-    tls:
-      enabled: false
+  service:
+    type: NodePort
+    nodePort: 31444
   adminAccount:
     passwordHash: $2a$10$Zrhhie4vLz5ygtVSaif6o.qN36jgs6vjtMBdM6yrU1FOeiAAMMxOm
     tokenSigningKey: iwishtowashmyirishwristwatch

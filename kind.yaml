@@ -15,3 +15,5 @@ nodes:
       - containerPort: 443
         hostPort: 443
         protocol: TCP
+      - containerPort: 31444 # Kargo dashboard
+        hostPort: 31444
