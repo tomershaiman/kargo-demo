@@ -6,11 +6,16 @@ source scripts/kubernetes.nu
 source scripts/ingress.nu
 source scripts/cert-manager.nu
 
-let github_username = input $"(ansi green_bold)Enter GitHub username: (ansi reset)"
-$"export GITHUB_USERNAME=($github_username)\n"
+mut github_org = ""
+if GITHUB_ORG in $env {
+    $github_org = $env.GITHUB_ORG
+} else {
+    $github_org = input $"(ansi green_bold)Enter GitHub private access token: (ansi reset)"
+}
+$"export GITHUB_ORG=($github_org)\n"
     | save --append .env
 
-let github_repo_url = $"https://github.com/($github_username)/kargo-demo"
+let github_repo_url = $"https://github.com/($github_org)/kargo-demo"
 $"export GITHUB_REPO_URL=($github_repo_url)\n"
     | save --append .env
 
@@ -46,11 +51,7 @@ apply_certmanager
     helm upgrade --install kargo
         oci://ghcr.io/akuity/kargo-charts/kargo
         --namespace kargo --create-namespace
-        --set api.service.type=NodePort
-        --set api.service.nodePort=31444
-        --set api.adminAccount.passwordHash='$2a$10$Zrhhie4vLz5ygtVSaif6o.qN36jgs6vjtMBdM6yrU1FOeiAAMMxOm'
-        --set api.adminAccount.tokenSigningKey=iwishtowashmyirishwristwatch
-        --wait
+        --values kargo-values.yaml --wait
 )
 
 open application-set.yaml
