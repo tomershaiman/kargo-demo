@@ -28,6 +28,15 @@ if GITHUB_PAT in $env {
 $"export GITHUB_PAT=($github_pat)\n"
     | save --append .env
 
+mut github_username = ""
+if GITHUB_USERNAME in $env {
+    $github_username = $env.GITHUB_USERNAME
+} else {
+    $github_username = input $"(ansi green_bold)Enter GitHub username: (ansi reset)" --suppress-output
+}
+$"export GITHUB_USERNAME=($github_username)\n"
+    | save --append .env
+
 create_kubernetes kind
 
 let ingress_data = apply_ingress kind nginx

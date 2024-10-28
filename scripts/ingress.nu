@@ -27,6 +27,20 @@ def apply_ingress [provider: string, type = "traefik"] {
                     deployment ingress-nginx-controller
             )
 
+            sleep 5sec
+
+            (
+                kubectl --namespace ingress-nginx wait
+                    --for=condition=Complete
+                    job ingress-nginx-admission-create
+            )
+
+            (
+                kubectl --namespace ingress-nginx wait
+                    --for=condition=Complete
+                    job ingress-nginx-admission-patch
+            )
+
         }
 
     } else {
