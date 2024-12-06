@@ -14,7 +14,7 @@ spec:
       steps:
       - uses: git-clone
         config:
-          repoURL: https://github.com/vfarcic/kargo-demo
+          repoURL: https://github.com/tomershaiman/kargo-demo
           checkout:
           - branch: main
             path: ./src
@@ -49,5 +49,5 @@ spec:
           apps:
           - name: silly-demo-dev
             sources:
-            - repoURL: https://github.com/vfarcic/kargo-demo
+            - repoURL: https://github.com/tomershaiman/kargo-demo
               desiredCommitFromStep: commit

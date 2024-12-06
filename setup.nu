@@ -10,7 +10,7 @@ mut github_org = ""
 if GITHUB_ORG in $env {
     $github_org = $env.GITHUB_ORG
 } else {
-    $github_org = input $"(ansi green_bold)Enter GitHub private access token: (ansi reset)"
+    $github_org = input $"(ansi green_bold)Enter GitHub Org (ansi reset)"
 }
 $"export GITHUB_ORG=($github_org)\n"
     | save --append .env
